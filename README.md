@@ -9,6 +9,35 @@ study it, fork it, report problems and propose improvements.
 - [The competition](https://sbox.game/jam/three)
 - [Original public source viewer](https://sbox.game/solovolt/paintball-baddies/source)
 
+## How it started, and why it changed
+
+Paintball Baddies was SoloVolt Games' first implementation of an idea that had
+previously existed only in discussions. The **One More Round** competition gave
+the solo project a deadline and a clear challenge: make something people would
+want to play again. The starting point was a cast of female paintballers,
+responsive third-person cover combat, and short matches where everyone stayed
+in the action instead of being eliminated. AI opponents filled empty seats so
+the game could be played even without a full human lobby.
+
+The public beta was a learning experience. Development and playtesting uncovered
+rough edges in movement, animation, multiplayer and presentation. More features
+alone did not make the core loop as satisfying as the creator wanted. Experiments
+with collecting and banking tokens, cooperative targets and attacking drones
+helped explore what was missing: clearer danger, stronger reactions to each shot,
+and more memorable moments.
+
+That search led to **Baddies vs Sausages**, a new direction built on the same
+foundation. The setting moved toward a restaurant, with angry sausage enemies,
+flying plates and eggs, destructible props, explosive arrows and freezing effects.
+The aim became playful, chaotic arcade combat with a stronger sense of cause and
+effect. This later prototype is still being developed and tested locally; it is
+not included in this source snapshot or a claim of a finished public release.
+
+This repository keeps the original Paintball Baddies chapter available and
+fulfills the promise to share its competition code. Anyone can study it, fork it
+under the applicable licenses, or suggest improvements. It records a starting
+point and the lessons behind the pivot, rather than erasing the earlier game.
+
 ## What is here
 
 The original Paintball Baddies code from public build **382169**, published on
