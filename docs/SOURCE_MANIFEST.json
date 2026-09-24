@@ -1,0 +1,740 @@
+{
+  "game": "solovolt.paintball-baddies",
+  "build": 382169,
+  "published": "2026-09-17T13:06:47.7+00:00",
+  "recovered": "2026-09-24",
+  "files": [
+    {
+      "path": "Code/AiIntelligenceReview.cs",
+      "sha256": "c3d11b3afec96b8972965e1edd21a3b146cc954e68ade1974730a9439aed7c35"
+    },
+    {
+      "path": "Code/AiMatchObservation.cs",
+      "sha256": "3b01e9278d7bd2ae343edfaf92261cb832421914f426a665bb1541176b98a9c8"
+    },
+    {
+      "path": "Code/AiRangeReview.cs",
+      "sha256": "1a570f6d723b80dbfe4eee6959b1ccc70e925f9f955490cab43a47bbaded8580"
+    },
+    {
+      "path": "Code/AiTacticsReview.cs",
+      "sha256": "9fc762da0e8fb06489214bc4938a26ded98178ddedadd361eb9e2f93417e2b94"
+    },
+    {
+      "path": "Code/AnimationInventoryReview.cs",
+      "sha256": "3b2d2eec73d8e1031b232a5a06349c65cef0dbfdf9f76373e2789be5fe8b480b"
+    },
+    {
+      "path": "Code/ArenaLightingReview.cs",
+      "sha256": "2a8a22d8f2bac18755bd5833bd6d2f43ac950ffe5dfb17c408ba21d45a16e9cf"
+    },
+    {
+      "path": "Code/ArenaMap.cs",
+      "sha256": "b38b2fb8445e352d8118858da48fb945c5ffd96c2462d284f75c284f26d17418"
+    },
+    {
+      "path": "Code/ArenaMatch.cs",
+      "sha256": "4988acb8bd6d96da019e4e3455119abd91d60801215c53ecbe4f07c6a4f3a8df"
+    },
+    {
+      "path": "Code/ArenaMatchChecks.cs",
+      "sha256": "136d8fbb5d008ec57c8028d4bf6db266c7c62cab42010bdeff0ab1b4e35e832c"
+    },
+    {
+      "path": "Code/ArenaOpponent.cs",
+      "sha256": "ef209a3e28ed5b8f416b2a6b2f6317a8c5df46cec6523e864ae7aa51aff41b17"
+    },
+    {
+      "path": "Code/ArenaOpponent.Heist.cs",
+      "sha256": "c0b5cba1fc3505682f29a99511c20b42473d0b570b81af863483a08d5c8446e2"
+    },
+    {
+      "path": "Code/ArenaOpponent.Navigation.cs",
+      "sha256": "cfe81d7c47e2fa8d362cf7c6c3a84395028063b69c6c13a07320564e86a11e64"
+    },
+    {
+      "path": "Code/ArenaOpponent.Perception.cs",
+      "sha256": "df96095729c9d2ea2200283e8cb6f576c10fbe26db6c4f2e2c8a595831ce8543"
+    },
+    {
+      "path": "Code/ArenaOpponent.Repositioning.cs",
+      "sha256": "e6a5c47b4956190348d1de26dfb28b9da8baa13864a79f22ba6561dd6c13e500"
+    },
+    {
+      "path": "Code/ArenaShield.cs",
+      "sha256": "f57e3a9a9d1f30d6c869a2a74fb0d90bb09358401062f5ff08810b577d67c682"
+    },
+    {
+      "path": "Code/ArenaVisualPolish.cs",
+      "sha256": "6cf3888a6be82781899b935ff9602e433570525930b2d79026d72d2c90bca240"
+    },
+    {
+      "path": "Code/Assembly.cs",
+      "sha256": "0451fc264bcb8e6a2ee64036bc2fc1149eb664be86d60e095b946877bfe7c908"
+    },
+    {
+      "path": "Code/AudioPlaybackReview.cs",
+      "sha256": "6c60dd537b82fa112489b9fb93e9e56942bb5fd2e58fee09bd7672ee1f5349d6"
+    },
+    {
+      "path": "Code/BindingCapturePanel.cs",
+      "sha256": "3963b1be5da375529e8f637920d1b179a5692919b522930e765f517e260fbdc1"
+    },
+    {
+      "path": "Code/BotCombatTuning.cs",
+      "sha256": "01dc0481ce7a9764051de4cc8ae9204ad49055560f5802424e9d61f1509bec8a"
+    },
+    {
+      "path": "Code/BunkerCoverReview.cs",
+      "sha256": "c4af85f0539c157d9780beaee732d828c451013f1f960d76ee3d04a3755780a5"
+    },
+    {
+      "path": "Code/BunkerHullChecks.cs",
+      "sha256": "e1619d7268dd10931eef4829703820795dc8b78d3834f0269b93b95648073b3e"
+    },
+    {
+      "path": "Code/CameraWallChecks.cs",
+      "sha256": "60894c08654892dc2e049fa138fd451387c1e5ba2e9d05f4161542361f631a24"
+    },
+    {
+      "path": "Code/CharacterEquipment.cs",
+      "sha256": "55703348a88455ff0d31910c733b6adeb092afac8554ccba68506230c1b2d1b7"
+    },
+    {
+      "path": "Code/CharacterHitboxes.cs",
+      "sha256": "34975302c813d43fc95b92003f467d91fa1722e86c22a2e4ed545ac796a91b0a"
+    },
+    {
+      "path": "Code/CharacterMarkerSound.cs",
+      "sha256": "8b588eca3a0c9a4898153448ec52fd589a7927ec8032b25b8f93256cfdcbd4f3"
+    },
+    {
+      "path": "Code/CharacterPaint.cs",
+      "sha256": "c151f159fa701838e400fcf755490c129b5baf4d59fd2733ac26092f02e402af"
+    },
+    {
+      "path": "Code/CharacterPaintColor.cs",
+      "sha256": "c5150815855f148c866e4a8017f74028628aba18f4c4bd54d649c763bf2694f0"
+    },
+    {
+      "path": "Code/CharacterPaintReview.cs",
+      "sha256": "e367ea1440632b5a2cd94914e07d0a04795b192dc133272bb5ecc2b08067f84b"
+    },
+    {
+      "path": "Code/CharacterVoice.cs",
+      "sha256": "3684d6ebdf357b55b3d56caefe1403bd4a7f8ab5ac895a5ee801cdceaeefccc2"
+    },
+    {
+      "path": "Code/CitizenLineupReview.cs",
+      "sha256": "f7d07625d67be91fc6612ca4a19a08dc79c6cfc2f782aad057eb3faefc09552d"
+    },
+    {
+      "path": "Code/CitizenLocomotion.cs",
+      "sha256": "5c61a690b9838ac663435196e141e35ed97b360b1a1947a0215f4560755a314f"
+    },
+    {
+      "path": "Code/CitizenMarkerGrip.cs",
+      "sha256": "8d3e42be154a2b8f3408e49e3085bc4cbacab4180f2c4aef31bfc2133e76a0f1"
+    },
+    {
+      "path": "Code/CitizenMatchRosterReview.cs",
+      "sha256": "3d0de23b9d2b0eda80deb22b45b64047e86aae6c18d0f25c4754afa74bbd1b41"
+    },
+    {
+      "path": "Code/CitizenOpponentIntegrationReview.cs",
+      "sha256": "9f686c67c33c80cc98a22eb3bb8e296d2db717dcc5119055a107a45658cc3dbf"
+    },
+    {
+      "path": "Code/CitizenOpponentPresentation.cs",
+      "sha256": "0efa296de84e3bc90a468a7d2d1f345d6a843355cad3bd40d7d5d097d0b5c137"
+    },
+    {
+      "path": "Code/CitizenPlayerIntegrationReview.cs",
+      "sha256": "34ad2caae91ce4f6d00c852fa4b7c9ffb435c83e6b68f51897444b367f4585c5"
+    },
+    {
+      "path": "Code/CitizenPlayerPresentation.cs",
+      "sha256": "29a95688b9c154c1f5d56e63c5b5c2ee6239037574294dcc57d82749c19c684b"
+    },
+    {
+      "path": "Code/CitizenPodReload.cs",
+      "sha256": "4077a52a1d6673490c586d0860e7c99679bc23cf5ada8bfa283d022a014b9b2c"
+    },
+    {
+      "path": "Code/CitizenReloadClock.cs",
+      "sha256": "6013b78ec0aa8c19df5eff72f7c441edeefa0d00eb95bd577c4b94bc8f306222"
+    },
+    {
+      "path": "Code/CitizenRiflePreview.cs",
+      "sha256": "45d0557d655d0cbb8a83ed426b77b55a04908727f953e554be7b226371d4f7ee"
+    },
+    {
+      "path": "Code/CitizenRosterAssets.cs",
+      "sha256": "a946860af6eb6f4d59b9edfccaad3d772d3c5ec4e039d3747d609522f7032dd9"
+    },
+    {
+      "path": "Code/CitizenRosterReview.cs",
+      "sha256": "4afa6559f5f89393ff265cd9a0119887744696dc43533cc26ee1ccfaf7a3d120"
+    },
+    {
+      "path": "Code/CitizenSuitFollowThrough.cs",
+      "sha256": "67268eb22efa92efee0428e2d0f0eb45226177a0ac37cc66fc834ec4b0b58bdf"
+    },
+    {
+      "path": "Code/CloseCameraVisibility.cs",
+      "sha256": "dfa72b4c6cfb072ef2e8780ffa64da20148a9bcd83fc3acca297c8a9d6c973b9"
+    },
+    {
+      "path": "Code/CloseCameraVisibilityReview.cs",
+      "sha256": "a2960063593b86edbdc966c6aa16591438c09eab272a1b64a49f614983242b46"
+    },
+    {
+      "path": "Code/CloseCombat.cs",
+      "sha256": "1776ff7d806393f2b12956c79b5ff20e474c308da5410502b150317aa5f3cd37"
+    },
+    {
+      "path": "Code/CloseCombatReview.cs",
+      "sha256": "41a9de13bc46136bcf1e53e653497aeaa9bbcc5972811587bea0fb4c64aa386c"
+    },
+    {
+      "path": "Code/CombatMotionChecks.cs",
+      "sha256": "696110597e79c7bf89566a72e1215156c605a12c8af91a306fed9885a5b75947"
+    },
+    {
+      "path": "Code/ConcreteCoverChecks.cs",
+      "sha256": "af1b3b4e377c9a0a9a234d80e0c671a3f312f96061dcd987705eaca843da53a0"
+    },
+    {
+      "path": "Code/ContextCoverReview.cs",
+      "sha256": "99e25dc2f1625c2d7c58d4d09e4ab7426aa1d1aa6d5f70d55de5f27e35b302af"
+    },
+    {
+      "path": "Code/ControllerResponseProbe.cs",
+      "sha256": "2147fde7c4f8dee88a0f343d38156d9cb7f830b6e8aec6c2abbdece6467429f5"
+    },
+    {
+      "path": "Code/ControlsPaintReview.cs",
+      "sha256": "55b6f5cae04fd71b9118ef6f969ce1e4d5e26bb436c9132a3e471f9f4b471ca5"
+    },
+    {
+      "path": "Code/CoverChecks.cs",
+      "sha256": "3c7894fc38458808930ac5dbd7b754c0f0d439d5d6c2c40459da69810d63a533"
+    },
+    {
+      "path": "Code/CoverConnectionsReview.cs",
+      "sha256": "05d08c6bfee8eca79e2174b92b6625a0e89dc01d8ebe98f3aa2ea264b4e0de3b"
+    },
+    {
+      "path": "Code/CoverController.cs",
+      "sha256": "0a8d8ad88b859e794808e4b6c46abdc0a4453286beb5ab497a16332a388e6ce0"
+    },
+    {
+      "path": "Code/CoveredAimChecks.cs",
+      "sha256": "398dca069f77ae8b0a0df8c4e6eb816f5e9d284bd5e2966efeed5163ed65371f"
+    },
+    {
+      "path": "Code/CoveredAimPose.cs",
+      "sha256": "544e2f13cbbf64dde4abc73c650159a11aabf39c6dd18080f6eeb0b85941265b"
+    },
+    {
+      "path": "Code/CoveredRosterAssets.cs",
+      "sha256": "1cd61cdba4a9f8f06976367add0a28867cd94eebeaca774070693d2dbd4b9667"
+    },
+    {
+      "path": "Code/CoveredStrideTransition.cs",
+      "sha256": "82995f5bd93a2e0a3e85d5f28debcb0c2fdf0d4480963acfe99b9a0f53099f8e"
+    },
+    {
+      "path": "Code/CoveredSuitMotion.cs",
+      "sha256": "2a3b5a9814a6c854c369e5460093503599fe271c14669a8d72b2332fe3db251c"
+    },
+    {
+      "path": "Code/CoveredVaultGroundProfiles.cs",
+      "sha256": "214cdb38a9910f91735fb66b05050e6b94d47c6ad9a6ef2ab4115b3d85698fb7"
+    },
+    {
+      "path": "Code/CoverFireReview.cs",
+      "sha256": "5ea8bae5df1fd60b90e6402c905bcfbb9ac763e286b81900d7595907a0740d7a"
+    },
+    {
+      "path": "Code/CoverInterruptionReview.cs",
+      "sha256": "c015cc1f10566e612419c4517a8f07b0c106b21642ed2a3740fea7791265420d"
+    },
+    {
+      "path": "Code/CoverMuzzleReview.cs",
+      "sha256": "efb554647baabe3fa4d1a2f5faebb9e17fc0d579ee79c7bc8ce1aa44c7bceadd"
+    },
+    {
+      "path": "Code/CoverSurface.cs",
+      "sha256": "c7c871a3ff231689b0d6c20c64ae77f4d46e12ca386963b71497f6e03442c109"
+    },
+    {
+      "path": "Code/CurvedCoverChecks.cs",
+      "sha256": "b1783dadac4d4356b4dc106cf19a747fe1f7794a2c59f4dc255fb8bdd07b6a37"
+    },
+    {
+      "path": "Code/DiagonalAimChecks.cs",
+      "sha256": "6357443a887f566b5e54277f47ae1863ba5e4906af6992f84d03d9bf57a85887"
+    },
+    {
+      "path": "Code/DroppedReloadPod.cs",
+      "sha256": "389cb5209ed40260f3b08ba604856e6c4ac69a6d5f3ddda4db34ca3a9da74e49"
+    },
+    {
+      "path": "Code/EnvironmentViewReview.cs",
+      "sha256": "4e6313375b6ac18e4b11318d55aa320732dbe792dba7d034267307e053e4f9a7"
+    },
+    {
+      "path": "Code/ExposureTimingChecks.cs",
+      "sha256": "9b4e800762440e489040dd25ea13e0819af4ef33c436dc3ed5838bbb6f362073"
+    },
+    {
+      "path": "Code/FastCoverReview.cs",
+      "sha256": "ba1f0ac4f1766e74ddcb791eba36c1c38c570cf1dd088730e5c3dad892e25a0e"
+    },
+    {
+      "path": "Code/ForwardAutoRun.cs",
+      "sha256": "51f9c0c61f71add1c649fa2a5512a25ec6cced2011d2ac1bb3a89b5e16db6b02"
+    },
+    {
+      "path": "Code/ForwardAutoRunReview.cs",
+      "sha256": "3fca805f6ffdc798c5d25cb8b9465b3a7bba93a89fd0fc94b52c3fa10835d87f"
+    },
+    {
+      "path": "Code/FoundryFixtureLighting.cs",
+      "sha256": "d6682c641d6ead003af674ead597404cfe8a68cb55f99df974a12cc74874222e"
+    },
+    {
+      "path": "Code/FoundryFloorMaterialReview.cs",
+      "sha256": "b40473453f624986399675ca156ffce8845ece3e0067eba548ac897ad38df7c3"
+    },
+    {
+      "path": "Code/FoundryLibraryAssets.cs",
+      "sha256": "62a80191647afe3fdfcd5da9dfa0ac5bfe3773986c8a0cae241167ce8ba6ebac"
+    },
+    {
+      "path": "Code/FoundryPaintWear.cs",
+      "sha256": "9104abb478aa9cc943e8ff11f47c8de4707302082ef26405cba0cf6520357f72"
+    },
+    {
+      "path": "Code/FoundrySkyDrift.cs",
+      "sha256": "ac54f46a5b8422f67e50cdd8093367204d0608a7f1c4aec1dcbc9c05bb819df0"
+    },
+    {
+      "path": "Code/FoundryVenueFixtures.cs",
+      "sha256": "82524d9dd3862e052941526cb3a8d35584f1f270012755d0f3aa57433ae33299"
+    },
+    {
+      "path": "Code/GearsControlsReview.cs",
+      "sha256": "8b959cc2fe14a98e9af3803ed9d63b2e498ec01815bc3b841e5bf2304a44d4c7"
+    },
+    {
+      "path": "Code/HandedCoverReview.cs",
+      "sha256": "9b7cf11d58fa5f77b40b4de750b59c794853030a544c82dfaa2b4eef23107b8c"
+    },
+    {
+      "path": "Code/HeistAudio.cs",
+      "sha256": "d0cc4a925f2d5892dfeeefc221720fcd0edbb4c31eb3d57d1d4e26e9de8240c3"
+    },
+    {
+      "path": "Code/HeistChip.cs",
+      "sha256": "1c03ddbaec74930f0b1d640d438220e2e0002e76eb84a4fcfa2282efe893a2c3"
+    },
+    {
+      "path": "Code/HeistHud.razor",
+      "sha256": "9c7dde74e7298afb13da7a2b4c97ff29d8a620f58d6f0822f029ad0ea1848aeb"
+    },
+    {
+      "path": "Code/HeistHud.razor.scss",
+      "sha256": "e19efefcc74ecf19c5e431f965a9d24accf0c939b29016e9d45b690e69892e65"
+    },
+    {
+      "path": "Code/HeistReview.cs",
+      "sha256": "85585d9f779f3c09a55533702770bf9b83d017576d0500b80fa07a1ce7f24224"
+    },
+    {
+      "path": "Code/HelmetFitPreview.cs",
+      "sha256": "7c969ec262f81bf0ce2eb4b168208e2a00dc46b6834e4418ab332dc2a482f7de"
+    },
+    {
+      "path": "Code/HelmetProfileReview.cs",
+      "sha256": "5a13aa3cc3da46087e761fc50c0884cf1e3d55de890d7c5b891a1729b427cddc"
+    },
+    {
+      "path": "Code/HitCoverReview.cs",
+      "sha256": "3fccabb2201b2668aef7a4ec9611b6fd073bbf43a24942a13bb94842f0b58131"
+    },
+    {
+      "path": "Code/HitDirectionChecks.cs",
+      "sha256": "9b4548cc6eec31aedd8df4b2454c973bd2b848f5ba8cb4855ac6bb4800fc3392"
+    },
+    {
+      "path": "Code/HudStateReview.cs",
+      "sha256": "3ff3c42f9f67c70a6088a2fc44a337a1c59f2ff03581e1af3f011daca3eba83f"
+    },
+    {
+      "path": "Code/IncomingPaintAwareness.cs",
+      "sha256": "9daf6138317889d021ed87eb1751480f16459fe4ba37facd27f20dd476a8b3e4"
+    },
+    {
+      "path": "Code/LandingRecoveryInterrupt.cs",
+      "sha256": "f850fa06be18704adaabdfd660e09d8ebc4d72b61def70a973c535ec5ed0ce17"
+    },
+    {
+      "path": "Code/LongRangePaintReview.cs",
+      "sha256": "00ab2e44e1f04b5a81108f96d106a9e39d4585b8663d16ca85798d83bc374fe1"
+    },
+    {
+      "path": "Code/LowCoverClearanceReview.cs",
+      "sha256": "b2738aaac0e674ebe7072f13cb8dc3fc44251e65368cc7264d06c18f67d15c08"
+    },
+    {
+      "path": "Code/MarkerRangeReview.cs",
+      "sha256": "ce14042f1a268855472688b0615a9893134d394443ef3c21d7dacbb58ec6998f"
+    },
+    {
+      "path": "Code/MatchPerformanceProbe.cs",
+      "sha256": "10df9965c8134566d4ba8ebcf5290b87e8ac682efd231d4fb9469da189a45e74"
+    },
+    {
+      "path": "Code/MeiLandingRecoveryGround.cs",
+      "sha256": "bbc012efe54b4e2f73d1fedfdd6ce54b06433861ffcaab7c274520b432a6b9e6"
+    },
+    {
+      "path": "Code/ModelImportChecks.cs",
+      "sha256": "bf69bc1d7c5cd9b3f7d665a99eb78983bd518a640adf36e12e4e7337111e2270"
+    },
+    {
+      "path": "Code/MovementFootsteps.cs",
+      "sha256": "c9ba62b4c2590a2dc7928fb4141251738911fee98a7d6f0e3ace089828a519c1"
+    },
+    {
+      "path": "Code/MovingReloadChecks.cs",
+      "sha256": "5d9f30b9d5f46ce5e312d1dbe43fba74b1a232b820d7cafc6c48644f050d992b"
+    },
+    {
+      "path": "Code/MultiplayerSession.cs",
+      "sha256": "9b2026cabdfe0b53cbc3db35b565aa62b54f44fd18cbbacd56e53f49b04caa9f"
+    },
+    {
+      "path": "Code/MultiplayerSession.Heist.cs",
+      "sha256": "5b1cc11e6ea1324654bdf5514a84a762c157f4c64352922e647409098fea3888"
+    },
+    {
+      "path": "Code/MultiplayerSession.Lobbies.cs",
+      "sha256": "0ddeee50a206daf0932c4b0812b92c95211f68901425bf5bd8249c26cde95838"
+    },
+    {
+      "path": "Code/MultiplayerSession.Paint.cs",
+      "sha256": "922b3555ddb06650de78ebe12debb8bddcac5d24e3357107113336491a106a39"
+    },
+    {
+      "path": "Code/NetworkBot.cs",
+      "sha256": "a84659478572a8b35b1a8b20a20f51c94181c6dd2fb3c7e7a2ca3bb9b7a37065"
+    },
+    {
+      "path": "Code/NetworkEffects.cs",
+      "sha256": "60eb2e0aca04e4d9f5ceef579120b287f192f589fcf1a91af5d7de9a61612cdd"
+    },
+    {
+      "path": "Code/NetworkPawn.cs",
+      "sha256": "48f191774d62eca9aa2fb8ec9e12268e7486a326845b9bda45cc7bfe312a2d6f"
+    },
+    {
+      "path": "Code/NetworkReview.cs",
+      "sha256": "302d36d9d01762b8c3be9c0f4893e7d347a82797e179f4e173f3383811740756"
+    },
+    {
+      "path": "Code/NetworkReview.Hud.cs",
+      "sha256": "705c3371de97d39cdfd16ef23101bad0fa58f7ed157144f655e63ff188bbf259"
+    },
+    {
+      "path": "Code/NetworkReview.Performance.cs",
+      "sha256": "ed31b04782f73e1ba5b8b20edc7894cb49c4c8e3624774dba7fc6cecfadb8950"
+    },
+    {
+      "path": "Code/OpponentBurstChecks.cs",
+      "sha256": "e8d6d44b0d96babc3d007ef098e19c10b822671e46dedf9d3ed06e595c4e060d"
+    },
+    {
+      "path": "Code/OpponentCoverChecks.cs",
+      "sha256": "39b3539d0212d575b0f8112eeaa1f1077996f98926dc27aacf8b88fe6471171e"
+    },
+    {
+      "path": "Code/OpponentCoverPlanner.cs",
+      "sha256": "3dade4bd770544709d0d5eeb092523596b753b926ff4d633336bf3062342c26e"
+    },
+    {
+      "path": "Code/OpponentIdleReloadChecks.cs",
+      "sha256": "851c30e45fc479764827f0c16220069fe095a91ed563faa0f6dbf5a7f950dfe3"
+    },
+    {
+      "path": "Code/OpponentMagazine.cs",
+      "sha256": "37061cdfa4b2b375d5733404be8d76c0032fa22ccfdf12904e13cd3b64cc84ee"
+    },
+    {
+      "path": "Code/OpponentNavigationChecks.cs",
+      "sha256": "fc5208baafbeda2710332c7547ce83d90a72d12be0d0c50ad1c387a6b3d517f6"
+    },
+    {
+      "path": "Code/OpponentPaintball.cs",
+      "sha256": "28042b016fe97d766921c87f9dd0583f176c30d2a44598ed7c5060c53ed64819"
+    },
+    {
+      "path": "Code/OpponentVisionChecks.cs",
+      "sha256": "0461c2b352ec92529a45133faf448c975f9cf96eb85cfccdd27ee608b4626c4c"
+    },
+    {
+      "path": "Code/OutSignalChecks.cs",
+      "sha256": "7dc2a48721cd1f12cb5a7423ce536c7cbaf7fccb53c93d35325c1b3e448a53fd"
+    },
+    {
+      "path": "Code/PaintballCombatant.cs",
+      "sha256": "d32cff2446b8da2fa7769e7d1f7bb099ddb86a8002c82410697bfc569af5ef76"
+    },
+    {
+      "path": "Code/PaintballCombatant.Heist.cs",
+      "sha256": "d873dbecad85bb8aa05c1ec460b7446041363fa689f40d5745aebb6fca1b0b7e"
+    },
+    {
+      "path": "Code/PaintballControls.cs",
+      "sha256": "dc44d53c8b34c9a25a9575a7e94370e97744b998059ab9f78b1663b9be8ff74c"
+    },
+    {
+      "path": "Code/PaintballFlight.cs",
+      "sha256": "3c4e1e219537b3985788f7f860c80fae0135e3752b9a28f2a2306930ae70834e"
+    },
+    {
+      "path": "Code/PaintballFlightReview.cs",
+      "sha256": "06f552be015144aec5640be0ac5135dd368f097c4dcc4f232aa98acec1b2a1f6"
+    },
+    {
+      "path": "Code/PaintballMarker.cs",
+      "sha256": "f18c12a58f5079e79257eb04ae7cbe872a7ffe27c2f3ce420d52e5ba78e0497e"
+    },
+    {
+      "path": "Code/PaintImpactChecks.cs",
+      "sha256": "cfe2e80d2c9031f72a1829049c348e04f16677d3c0d4070d050de9a90ac91cab"
+    },
+    {
+      "path": "Code/PaintImpactSystem.cs",
+      "sha256": "6ecaac947621c9705f799bb51e3aad3c8332dcdd8ba4677037bc6df16c7ad09c"
+    },
+    {
+      "path": "Code/PaintRushReview.cs",
+      "sha256": "87c64b051ad8c51f6ae2611a0f622629579004815127dd048233107e35e25b30"
+    },
+    {
+      "path": "Code/PatrolRouteChecks.cs",
+      "sha256": "1cfdf35c0f4dffe594faa3a4f25b3831012ac57839a6f3659c9c158560210d3a"
+    },
+    {
+      "path": "Code/PhysicalOpponentHitChecks.cs",
+      "sha256": "da14a2e79b806b8732def8eae7d760f98f776171dd5cea680f1fc81ef53aa05f"
+    },
+    {
+      "path": "Code/PlayerProfile.cs",
+      "sha256": "68ae83a42503976def326b71c1f8e8dfe750d8132bd21088091800e37074795b"
+    },
+    {
+      "path": "Code/PlayerVoiceChat.cs",
+      "sha256": "9adb6af825a20d4d9db33f35e329b6729a83928556b5019a5bedd6909b42bfb2"
+    },
+    {
+      "path": "Code/ProtectedRosterPreview.cs",
+      "sha256": "df766ac973450b7476e699efc09736945b43efb51d66d851544da8667fa46e9a"
+    },
+    {
+      "path": "Code/QuickTurnGesture.cs",
+      "sha256": "451ad7e719189996e77a7edee5c037498bda010ebf36ff1b808e5b14ace8c3ea"
+    },
+    {
+      "path": "Code/RaisedMarkerReview.cs",
+      "sha256": "5b1f2f5e2cfa04a946a01267bc6b8a46cedc093e5f51c78a324d66b3727ef7b2"
+    },
+    {
+      "path": "Code/ReloadDockChecks.cs",
+      "sha256": "cca2176d39e76f3856331b73ee1fdbeb11ddb8e3645a396b33de8621fd713e92"
+    },
+    {
+      "path": "Code/ReloadPresentationTrack.cs",
+      "sha256": "c6688b874da1939351a0eef587bccbb3a829848157c84edc19b30ba25b791684"
+    },
+    {
+      "path": "Code/ReloadUpperBodyChecks.cs",
+      "sha256": "d028ee46bd01f6861301bd2803ac27eb40e988a691f81b887705e4cd25aacf3b"
+    },
+    {
+      "path": "Code/ReloadUpperBodyData.cs",
+      "sha256": "0e23295488f9fef2a911dce9a35c9264c69ebbca453308a0518cbf5045aae90d"
+    },
+    {
+      "path": "Code/RosterChecks.cs",
+      "sha256": "3817fe4723d6e2a66db58fb885356fcb5f3844531f12b72a689b40d70c4f5a9f"
+    },
+    {
+      "path": "Code/RosterHelmet.cs",
+      "sha256": "5be46d850fa31faaf82809c2c65c30ea876018ae1368e102557a42152af88c48"
+    },
+    {
+      "path": "Code/RosterHelmetChecks.cs",
+      "sha256": "ac36de8bb3aeceab2b37806be550e52df9efb99d1d82daa414db8ab7e606d832"
+    },
+    {
+      "path": "Code/RosterSelection.cs",
+      "sha256": "beafd6ba05a9413de9fbb10e9b75e2a3e1544b5e4c4b81b3f3320484d1720415"
+    },
+    {
+      "path": "Code/RoundHighlights.cs",
+      "sha256": "7f15274d738a3baba502f606a39c19efab74f872a0ceba930569cfda346b2234"
+    },
+    {
+      "path": "Code/RoundStopChecks.cs",
+      "sha256": "d81e8ef2dde3b605d4c5bbe33510ffe870f754ec2b2d0af5029b031a3bb34075"
+    },
+    {
+      "path": "Code/RunMotionChecks.cs",
+      "sha256": "37295ee558f462d8d7addcf72fc5df406f12f43cfb90274e179b24e72c1a85ef"
+    },
+    {
+      "path": "Code/SandbagBunker.cs",
+      "sha256": "6ebe919ccacb99e927bc27c811bbe9932e576cbf307e08f7b97db6d6dffc5cda"
+    },
+    {
+      "path": "Code/SandbagNavigationReview.cs",
+      "sha256": "5a1155721a6d3005fa42a0a57c0e4b5d5e48e5afc5089d3f6e07808341e53e9a"
+    },
+    {
+      "path": "Code/ShieldBreakEffect.cs",
+      "sha256": "3b1f476820b0276496ea151de4f033a581ff256029d5ea0da94db2dffa17aaf6"
+    },
+    {
+      "path": "Code/ShieldOutgoingReview.cs",
+      "sha256": "b4bf71c4f0a47bc310a079f21c59c5125cf84cfd4cc086ec1aac066bbdfd827a"
+    },
+    {
+      "path": "Code/ShieldPaintReview.cs",
+      "sha256": "071413855cea4e6f7a14007d74f47eefc28bad1788083abdd1f4a23c687286bb"
+    },
+    {
+      "path": "Code/ShieldScoreReview.cs",
+      "sha256": "6d187fdc625d2a30af78199705dd09acfb7f3e0d5b3fd199baabfa2fd55cbbfa"
+    },
+    {
+      "path": "Code/ShieldVaultReview.cs",
+      "sha256": "148cc894dc51b98aeaf802359d8c76ec8b0f966fb7640466730ff1a9855e3262"
+    },
+    {
+      "path": "Code/ShuffleMovementReview.cs",
+      "sha256": "4264602c83963153c2f766755fd0e96408f43186b102f27e8df68b754d3c104b"
+    },
+    {
+      "path": "Code/SkyDriftProbe.cs",
+      "sha256": "8e7d1f8756854467ebca94285067ee09ef8a0711dba3f30c4c639e3cb575a915"
+    },
+    {
+      "path": "Code/SlideCoverReview.cs",
+      "sha256": "7bd1eef7f3161b40ba9b1e8aba8334773e7bbbee871206e20e0b01754f2c9d36"
+    },
+    {
+      "path": "Code/SnakeBunker.cs",
+      "sha256": "185ed84da3ee6c996f1e917716f8a1e0ea8c7cd34273c7fbe3164007cd4db651"
+    },
+    {
+      "path": "Code/SnakeNavigationReview.cs",
+      "sha256": "35d99dd024792428945e68d938f014fee19f5925fa6af7290b1afabdc4b32d04"
+    },
+    {
+      "path": "Code/StagingAreaChecks.cs",
+      "sha256": "eaa26d449b6aae8c377a2d51e3b4af4ef91181502e50fb95d936e280a8456701"
+    },
+    {
+      "path": "Code/StandingCoverRegistrationReview.cs",
+      "sha256": "4b79878846f9a640f13dadb7f6cd82375130830913a5172002ddc8af2682ad42"
+    },
+    {
+      "path": "Code/StandingCoverReview.cs",
+      "sha256": "d9c0328614db4de2a39bc1141a2b5615143751f7b8c222cc6e7d297f59921b9a"
+    },
+    {
+      "path": "Code/StandingStrafeChecks.cs",
+      "sha256": "9f572f7082a47343f06a910f215497080e1a9dec89fe4552c7ecddc079eb70de"
+    },
+    {
+      "path": "Code/StaticPropReview.cs",
+      "sha256": "2b561fab1ccae2bfbbcdb92907335f1baa1e1398a88c502bfce4a82f7e47d24b"
+    },
+    {
+      "path": "Code/StrideTransitionChecks.cs",
+      "sha256": "4a2817b77710ee809fe04072499163794808801f83410fba154744a932e03562"
+    },
+    {
+      "path": "Code/SuppressionRepositionReview.cs",
+      "sha256": "c1ac2826ee8bafee982e8f302fe604d3416c1405034d1b2e1d1c3da5f7e11887"
+    },
+    {
+      "path": "Code/SurfacePaintReview.cs",
+      "sha256": "42c8e6f56b7c2725fc7a9d670760a00a6319391e51d587f173bbd06fc83e67bd"
+    },
+    {
+      "path": "Code/TankNavigationChecks.cs",
+      "sha256": "37491bede0897c75f7b4a116e32d9dbe7b7392eea79534de748cd72dbc11f0aa"
+    },
+    {
+      "path": "Code/TargetBurstReview.cs",
+      "sha256": "01f0b99d7c80041d16a4cbb83afd80cea6d6b05a0901e8d89a94b1fae9ac2999"
+    },
+    {
+      "path": "Code/TraceSurfaces.cs",
+      "sha256": "3d22551719eb12e11e922c40665a1712568a53b6a70d846e2ebed0e70c0a2b3b"
+    },
+    {
+      "path": "Code/TrainingChecks.cs",
+      "sha256": "e5cf6c511068024d12b5e9a440d09853dab0ea37634195f325880dce9b57d183"
+    },
+    {
+      "path": "Code/TrainingHud.razor",
+      "sha256": "269237d9d64d5c407f09088ce6278280f45482623e2bc9dc176b527d4634467a"
+    },
+    {
+      "path": "Code/TrainingHud.razor.scss",
+      "sha256": "39137d5a7e4dce4664faa8128d841c1dc494e1053104346140b0deed1b8e3b48"
+    },
+    {
+      "path": "Code/TrainingRange.cs",
+      "sha256": "d46f6abd6b4bbb925dce2ee7085659f6a4c5375dff54655033e346f6f21f659e"
+    },
+    {
+      "path": "Code/VaultChecks.cs",
+      "sha256": "2273db427877f3d68aeb6ba972dd01535669a58db132c7df047b9efe84a05983"
+    },
+    {
+      "path": "Code/VaultController.cs",
+      "sha256": "819b4cf85ae15007b8d28a2f67a6ef94aa0751db80ee5e659d4a7b3e360b2bff"
+    },
+    {
+      "path": "Code/VaultGroundProfiles.cs",
+      "sha256": "f746045a3cac47ac4e4e631b72b18963cb9bccdd78842c1fd7366dd74726fc5f"
+    },
+    {
+      "path": "Code/VaultInterruptionReview.cs",
+      "sha256": "bfc4f63b52aba68fa134d827070dc3369cdb00b9bd46c49c6fe955b0dc2626bb"
+    },
+    {
+      "path": "Code/VaultPlanner.cs",
+      "sha256": "0a84ecacfd74d7535301f8b7c627c9e14d0b53e4a1c272083ed24a6795ec4346"
+    },
+    {
+      "path": "Code/VaultTraversalChecks.cs",
+      "sha256": "6a32acb2e369bfe1614411a18ad3881e77d38d13033e2111fb89b0eaf6830583"
+    },
+    {
+      "path": "Code/ViperAvatar.cs",
+      "sha256": "ac0382f964ecf02776247f016addc992c63910f3c116bfe756231e9704f98204"
+    },
+    {
+      "path": "Code/WallMaterialReview.cs",
+      "sha256": "c2f4f1683a444e0c7dc6247f8642197698d0ed6a8cdc31aab351987f22b4f032"
+    }
+  ]
+}

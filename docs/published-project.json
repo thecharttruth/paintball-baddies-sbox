@@ -1,0 +1,26 @@
+{
+  "Title": "Paintball Baddies \u2014 Public Beta",
+  "Type": "game",
+  "Org": "solovolt",
+  "Ident": "paintball-baddies",
+  "Schema": 1,
+  "IncludeSourceFiles": true,
+  "Resources": "animations/*.json\ntextures/paint/paint_splash_irregular_v2.png\ntextures/venue_wear/*.png\nmodels/gear/clear_shield/fracture/layout.json\nsounds/heist/*.vsnd",
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Mounts": null,
+  "IsStandaloneOnly": false,
+  "Metadata": {
+    "MaxPlayers": 6,
+    "MinPlayers": 1,
+    "TickRate": 50,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [],
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "CsProjName": "",
+    "StartupScene": "scenes/neon_foundry.scene"
+  }
+}

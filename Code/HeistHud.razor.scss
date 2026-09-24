@@ -1,0 +1,27 @@
+HeistHud {
+    position: absolute; width: 100%; height: 100%; pointer-events: none; font-family: Arial; color: #ffffff;
+    label { color: #ffffff; }
+    .heist-wallet { position: absolute; left: 34px; top: 216px; width: 286px; padding: 15px; border-radius: 8px; background-color: #131321ed; flex-direction: column; gap: 12px; }
+    .wallet-section { align-items: center; gap: 16px; }
+    .wallet-copy { flex-direction: column; }
+    .amount { font-size: 33px; font-weight: 900; }
+    .caption { font-size: 14px; font-weight: bold; letter-spacing: 1px; }
+    .carried .amount, .carried .caption { color: #ffd16c; }
+    .banked .amount, .banked .caption { color: #77f4ce; }
+    .wallet-rule { font-size: 11px; letter-spacing: 1px; color: #c9c9da; }
+    .chip-icon { width: 34px; height: 34px; border-radius: 50%; background-color: #ffc554; border: 3px solid #ffe2a0; justify-content: center; align-items: center; }
+    .paint-drop { width: 12px; height: 16px; background-color: #34262a; border-radius: 70% 70% 70% 0%; transform: rotate(135deg); }
+    .lock-icon { position: relative; width: 30px; height: 24px; margin: 8px 2px 0px 2px; background-color: #77f4ce; border-radius: 4px; }
+    .lock-loop { position: absolute; left: 6px; top: -12px; width: 18px; height: 18px; border: 3px solid #77f4ce; border-radius: 9px; }
+    .bank-guide { position: absolute; top: 28px; left: 33%; width: 34%; padding: 12px 16px; background-color: #131321ed; border-top: 3px solid #77f4ce; border-radius: 5px; flex-direction: column; gap: 8px; align-items: center; }
+    .bank-heading { width: 100%; justify-content: center; align-items: center; gap: 14px; font-size: 19px; font-weight: bold; }
+    .bank-arrow { font-size: 30px; color: #77f4ce; width: 32px; height: 35px; text-align: center; }
+    .bank-relocation { color: #c9c9da; font-size: 11px; }
+    .bank-instruction { font-size: 16px; text-align: center; color: #f3f3fa; }
+    .deposit-track { width: 100%; height: 6px; border-radius: 3px; background-color: #39394b; }
+    .deposit-fill { height: 100%; border-radius: 3px; background-color: #77f4ce; }
+    .token-feedback { position: absolute; top: 65%; width: 100%; justify-content: center; label { padding: 8px 15px; background-color: #131321ed; border-radius: 4px; color: #ffd16c; font-size: 16px; font-weight: bold; } }
+    .token-feedback.spill label { color: #ffac9b; }
+    .token-feedback.secured label { color: #77f4ce; }
+    .bank-notice { position: absolute; bottom: 165px; width: 100%; justify-content: center; label { padding: 8px 15px; background-color: #131321ed; border-radius: 4px; color: #77f4ce; font-size: 16px; font-weight: bold; } }
+}

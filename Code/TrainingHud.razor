@@ -1,0 +1,472 @@
+@using Sandbox
+
+
+@using Sandbox.UI
+
+
+@using PaintballBaddies
+
+
+@inherits PanelComponent
+
+@namespace PaintballBaddies
+
+
+
+<root>
+    @if (Controls?.Open == true && Controls.Capturing is not null)
+    { <BindingCapturePanel Controls=@Controls /> }
+
+    @if (Controls?.Open == true)
+    {
+        <div class="controls-overlay"><div class="controls-menu">
+            <label class="brand">PAINTBALL BADDIES</label>
+            <label class="menu-tagline">LAND PAINT. TAKE COVER. STAY IN THE FIGHT.</label>
+            <label class="menu-help">PUBLIC BETA / WORK IN PROGRESS</label>
+            <div class="menu-exit-actions">
+                <button onclick=@(()=>Game.Overlay.ShowSettingsModal())>S&amp;BOX SETTINGS</button>
+                <button class="quit-game" onclick=@(()=>Controls.QuitGame())>QUIT TO S&amp;BOX</button>
+            </div>
+            <label class="menu-help">Esc / M resumes. Quit returns to s&amp;box.@(MultiplayerSession.Online && Networking.IsHost ? " You are hosting: quitting ends this match for everyone." : "")</label>
+            @if(MenuPage=="home")
+            {
+                <TextEntry @ref=NameEntry class="player-name" Value:bind=@Controls.NameDraft MaxLength=@PlayerProfile.MaxNameLength Placeholder="Your player name" />
+                <label class="section-label">@MultiplayerSession.ModeTitle(Session?.InRound==true ? Session.ActiveMode : Session?.Mode ?? ArenaGameMode.PaintRush) / @((int)(Match?.RoundDuration ?? 180)/60) MIN</label>
+                @if(Session?.InRound!=true && (!MultiplayerSession.Online || Networking.IsHost))
+                { <div class="timer-options"><button class="@(Session?.Mode==ArenaGameMode.PaintRush ? "selected" : "")" onclick=@(()=>Session?.SelectMode(ArenaGameMode.PaintRush))>PAINT RUSH</button><button class="@(Session?.Mode==ArenaGameMode.PaintHeist ? "selected" : "")" onclick=@(()=>Session?.SelectMode(ArenaGameMode.PaintHeist))>PAINT HEIST</button></div> }
+                <label class="menu-help">@MultiplayerSession.HelpFor(Session?.InRound==true ? Session.ActiveMode : Session?.Mode ?? ArenaGameMode.PaintRush)</label>
+                <div class="play-options">
+                    @if(Session?.QuickPlaying==true || Networking.IsConnecting)
+                    { <div class="play-wait"><label>@(Networking.IsConnecting ? "CONNECTING..." : "FINDING YOUR MATCH...")</label></div> }
+                    else
+                    { <button class="play-primary" onclick=@Play>@PlayLabel</button> }
+                </div>
+                <label class="menu-help">@(MultiplayerSession.Online && Session?.CanQuickPlay!=true ? ConnectionHint : "Join a public match or start one instantly. AI fills empty seats; people can join as you play.")</label>
+                <label class="menu-best">@MenuPersonalBest</label>
+                <div class="menu-links">
+                    <button onclick=@(()=>MenuPage="matches")>MATCH OPTIONS</button>
+                    <button onclick=@(()=>MenuPage="settings")>SETTINGS & CONTROLS</button>
+                    <button onclick=@OpenFeedback>FEEDBACK</button>
+                </div>
+                <label class="quick-controls">@QuickControls</label>
+            }
+            else
+            {
+                <div class="page-heading"><button onclick=@BackHome>BACK</button><label class="section-label">@(MenuPage=="matches" ? "MATCH OPTIONS" : MenuPage=="settings" ? "SETTINGS & CONTROLS" : "CREDITS & COMMUNITY")</label></div>
+                @if(MenuPage=="matches")
+                {
+                    <label class="menu-help">SIX COMPETITORS / PEOPLE + AI</label>
+                    <label class="section-label">@(Match?.InRound==true ? "NEXT ROUND MODE" : "GAME MODE")</label>
+                    @if(!MultiplayerSession.Online || Networking.IsHost)
+                    { <div class="timer-options"><button class="@(Session?.Mode==ArenaGameMode.PaintRush ? "selected" : "")" onclick=@(()=>Session?.SelectMode(ArenaGameMode.PaintRush))>PAINT RUSH</button><button class="@(Session?.Mode==ArenaGameMode.PaintHeist ? "selected" : "")" onclick=@(()=>Session?.SelectMode(ArenaGameMode.PaintHeist))>PAINT HEIST</button></div> }
+                    else { <label class="menu-help">@MultiplayerSession.ModeTitle(Session?.Mode ?? ArenaGameMode.PaintRush) / CHOSEN BY HOST</label> }
+                    <label class="menu-help">@Session?.ModeHelp</label>
+                    <label class="section-label">@(Match?.InRound==true ? "NEXT ROUND DURATION" : "ROUND DURATION")</label>
+                    @if(!MultiplayerSession.Online || Networking.IsHost)
+                    {
+                        <div class="timer-options">
+                            @foreach(var minutes in ArenaMatch.RoundMinuteOptions)
+                            { <button class="@(Match?.RoundDuration==minutes*60 ? "selected" : "")" onclick=@(()=>Match?.SetRoundMinutes(minutes))>@minutes MIN</button> }
+                        </div>
+                        @if(Match?.InRound==true){<label class="menu-help">Applies to the next round. The current timer stays unchanged.</label>}
+                    }
+                    else { <label class="menu-help">@($"{Session?.Minutes ?? 3} MINUTES / CHOSEN BY THE HOST")</label> }
+                    @if(!MultiplayerSession.Online)
+                    {
+                        <button onclick=@(()=>Session?.Host())>CREATE PUBLIC MATCH</button>
+                        <button onclick=@(()=>Session?.Host(false))>CREATE FRIENDS-ONLY MATCH</button>
+                        <label class="menu-help">Both use the same rules and AI fill. Friends-only keeps your match out of public matchmaking.</label>
+                    }
+                    else
+                    {
+                        <label class="menu-help">@ConnectionHint</label>
+                        @if(Networking.IsHost)
+                        {
+                            <button onclick=@(()=>Controls.StartMatch())>@(Session?.InRound==true ? "RESTART ROUND" : "START NEXT ROUND")</button>
+                            <label class="menu-help">HOST STEAM ID: @Connection.Host.SteamId.ValueUnsigned</label>
+                        }
+                        <button onclick=@(()=>Controls.QuitGame())>QUIT TO S&amp;BOX</button>
+                    }
+                    @if(Session?.CanQuickPlay==true)
+                    {
+                        <button onclick=@BrowseGames>@(Session?.Searching==true ? "SEARCHING..." : "BROWSE MATCHES")</button>
+                        @if(ShowJoin && Session is not null)
+                        {
+                            <div class="menu-section join-section">
+                                @foreach(var lobby in Session.Lobbies)
+                                { <button onclick=@(()=>{if(!lobby.IsFull && MultiplayerSession.CompatibleLobby(lobby))Session.JoinLobby(lobby);})>@MultiplayerSession.LobbyLabel(lobby)</button> }
+                                <TextEntry @ref=JoinEntry class="player-name" Value:bind=@Session.JoinAddress Placeholder="Host Steam ID or lobby ID" />
+                                <button onclick=@(()=>Session.JoinTyped())>JOIN BY ID</button>
+                            </div>
+                        }
+                    }
+                }
+                else if(MenuPage=="settings")
+                {
+            <label class="menu-help">PAINT RUSH: hits and knockdowns score points. PAINT HEIST: hits earn carried tokens; getting hit drops 1, a knockdown drops half. Walk over gold chips to collect. Stay in the bank ring for 1.25 seconds to secure them; getting hit interrupts. Banked tokens are safe. Only banked tokens count at time-up.</label>
+            <label class="menu-help">Knockdowns cost the victim their shield. Shields block five front paintball hits or two gun-butt strikes. Heist wallets, bank directions and deposit prompts stay visible when general HUD text is hidden. No new keys are needed.</label>
+
+            <label class="menu-help">Move the mouse to aim. @Key("cover") takes / leaves cover, even when standing still. In cover, @Key("attack1") rises / peeks and fires; release to hide. Tap for one shot or hold to keep firing. @Key("attack2") is optional focus. Outside cover, a close @Key("attack1") click strikes with the gun butt; holding @Key("attack2") keeps it shooting. Downed: tap @Key("attack2") 5 times quickly.</label>
+            <label class="menu-help">In open space, tap @Key("cover") to crouch; tap again to stand. Near a cover object it takes cover instead. @Key("duck") also works as hold-to-crouch. Double-tap @Key("backward") to quickly turn around. Hold it normally to walk backward.</label>
+            <label class="menu-help">@Key("togglehud") toggles gameplay text. @Key("togglescoreboard") toggles the scoreboard separately. Essential cues stay visible: crosshair, incoming-hit arc, get-up instructions, final countdown and round results. Esc or M opens this menu, even with the HUD hidden.</label>
+            <label class="menu-help">MULTIPLAYER VOICE: @(PlayerVoiceChat.HoldToTalk ? $"hold {Key("voice")} to talk; release to mute" : $"tap {Key("voice")} to turn your mic on; tap again to mute"). Everyone in your match can hear you. Your mic starts muted and opening this menu mutes it. Choose your microphone and voice volume in s&amp;box settings.</label>
+            <button onclick=@(()=>PlayerVoiceChat.Toggle())>VOICE CHAT: @(PlayerVoiceChat.ChatEnabled ? "ON" : "OFF / MUTED")</button>
+            <button onclick=@(()=>PlayerVoiceChat.ToggleMode())>MIC CONTROL: @(PlayerVoiceChat.HoldToTalk ? "HOLD TO TALK" : "TAP ON / TAP OFF")</button>
+                <label class="menu-help">@Controls.Notice</label>
+            <button onclick=@(()=>AutoRun?.ToggleAutomatic())>AUTO-RUN: @(AutoRun?.Automatic==true ? "ON" : "OFF") / HOLD FORWARD 1.25s</button>
+            <button onclick=@(()=>Controls.ToggleGameplayText())>SHOW GAMEPLAY TEXT: @(Controls.ShowGameplayText ? "ON" : "OFF")</button>
+            <button onclick=@(()=>Controls.ToggleScoreboard())>SHOW SCOREBOARD: @(Controls.ShowScoreboard ? "ON" : "OFF")</button>
+
+            <div class="binding-list">
+
+                <div class="menu-links">
+                    <button onclick=@(()=>Controls.SetMovementLayout(false))>WASD MOVEMENT</button>
+                    <button onclick=@(()=>Controls.SetMovementLayout(true))>ARROW KEY MOVEMENT</button>
+                </div>
+                @foreach(var action in Controls.Bindings.Keys.Where(key=>!key.StartsWith("slot") && key!="use"))
+
+                {
+
+                    <div class="binding-row"><label>@Controls.Titles[action]</label><button onclick=@(()=>Controls.Capture(action))>@(Controls.Capturing==action ? "PRESS A KEY…" : Controls.Label(action))</button></div>
+
+                }
+
+            </div>
+
+                <button onclick=@(()=>Controls.ResetBindings())>RESTORE DEFAULT BINDINGS</button>
+
+                    <button onclick=@(()=>MenuPage="credits")>CREDITS & COMMUNITY</button>
+                }
+                else
+                {
+                <div class="credits">
+                    <label>PAINTBALL BADDIES / PUBLIC BETA 0.1</label>
+                    <label class="menu-help">Created by SoloVolt Games — a solo creator building with AI and community contributions.</label>
+                    <label class="menu-help">Game code: Paintball Baddies contributors (MIT). Engine, Citizen rig/animations and library assets: Facepunch.</label>
+                    <label class="menu-help">Voices: CiciFyre and creator-provided ElevenLabs audio. Selected marker sounds: creator-provided ElevenLabs audio. Additional recordings: Joseph Sardin / BigSoundBank and Arq1998. Interface/contact sources: Kenney. Materials: ambientCG. Fallback animation: Quaternius.</label>
+                    <label class="menu-help">Generative AI art: Meshy models and generated visual/texture sources, adapted for the game. Full asset terms and modifications are recorded in ASSET_CREDITS.md.</label>
+                    <label class="menu-help">Please leave feedback on our s&box game page: sbox.game/solovolt/paintball-baddies. Include Beta 0.1, host/join, what happened and steps to repeat it. Screenshots or short clips help.</label>
+                    <label class="menu-help">This beta is still being tested for Internet joining, animation and long-session stability. Player-hosted matches end when the host leaves.</label>
+                    <label class="menu-help">Community maps and fixes are welcome. Submitted work is reviewed and playtested before official inclusion, with author credit. Original game code is MIT licensed; third-party art retains its own terms.</label>
+                </div>
+                }
+            }
+            @if(!string.IsNullOrEmpty(Session?.Notice)) { <label class="menu-help search-notice">@Session.Notice</label> }
+            @if(Session?.Searching==true || Session?.QuickPlaying==true) { <button onclick=@(()=>Session.CancelPlaySearch())>CANCEL SEARCH</button> }
+        </div></div>
+    }
+    @if(Controls?.Open==true && ShowFeedback)
+    {
+        <div class="feedback-overlay"><div class="feedback-window">
+            <div class="feedback-header"><label>FEEDBACK / BUG REPORTS</label><button onclick=@(()=>ShowFeedback=false)>BACK TO GAME MENU</button></div>
+            <label class="menu-help">Tell us what happened, whether you hosted or joined, and how to repeat it.</label>
+            <WebPanel class="feedback-browser" Url=@FeedbackUrl />
+        </div></div>
+    }
+
+    @if (ShowGameplayText)
+    {
+    <div class="title"><label class="brand">PAINTBALL BADDIES</label><label class="location">@ArenaMap.DisplayTitle(Scene).ToUpperInvariant() / @(Match?.Status ?? "TRAINING")</label></div>
+
+    <div class="match @(Match?.InRound == true ? "active" : "")">
+
+        @if (Match?.InRound == true)
+
+        {
+
+            <label class="round-clock @(ClockSeconds <= 10 ? "urgent" : ClockSeconds <= 30 ? "warning" : "")">@Clock</label>
+
+            <div class="round-detail"><label>@(Session?.IsHeist==true ? "PAINT HEIST" : $"{Match.PlayerState?.HitsLanded ?? 0} LANDED / {Match.PlayerState?.PaintHits ?? 0} RECEIVED")</label><label class="round-objective">@(Session?.IsHeist==true ? "EARN / COLLECT / BANK" : "LAND PAINT / AVOID PAINT / EVERYONE STAYS IN")</label></div>
+
+        }
+
+        else
+
+        {
+
+            <label>@RoundHint</label>
+
+        }
+
+    </div>
+
+    @if (Match?.InRound == true && Match.PlayerState?.HitFeedbackRemaining > 0)
+
+    {
+
+        <div class="damage"><label>@DamageHint</label></div>
+
+    }
+
+    }
+
+    @if (ShowIncomingDirection)
+    {
+        <div class="incoming-direction" style="@IncomingDirectionStyle"><div class="incoming-arc"></div></div>
+    }
+
+    @if (MultiplayerSession.Online && PlayerVoiceChat.ChatEnabled && !string.IsNullOrEmpty(SpeakingNames))
+    {
+        <div class="voice-indicator"><label>@(LocalVoice?.Talking==true ? PlayerVoiceChat.HoldToTalk ? "MIC ON / RELEASE TO MUTE" : $"MIC ON / {Key("voice")} TO MUTE" : "VOICE") · @SpeakingNames</label></div>
+    }
+
+    @if (ShowRecoveryPrompt)
+    {
+        <div class="recovery-prompt"><div class="recovery-card">
+            <label class="recovery-title">@(Contact?.Recovering==true ? "GETTING UP" : "KNOCKED DOWN")</label>
+            <label class="recovery-instruction">@RecoveryMessage</label>
+            <div class="recovery-progress">
+                @for(var i=0;i<CloseCombat.RequiredRecoveryPresses;i++)
+                {
+                    <div class="recovery-pip @(i<RecoveryProgress ? "filled" : "")"></div>
+                }
+                <label>@RecoveryProgress / @CloseCombat.RequiredRecoveryPresses</label>
+            </div>
+        </div></div>
+    }
+
+    @if (!ShowGameplayText && Controls?.Open!=true && Match?.InRound==true && ClockSeconds<=10)
+    {
+        <div class="final-countdown"><label>ROUND ENDS IN @ClockSeconds</label></div>
+    }
+
+    @if (Controls?.ShowScoreboard != false && Match is not null && (Match.InRound || Match.Status == "TIME UP"))
+
+    {
+
+        <div class="leaderboard">
+
+            <label class="board-title">@(Match.InRound ? "LIVE STANDINGS" : "FINAL STANDINGS")</label>
+            @if (!ShowGameplayText && Match.InRound)
+            {
+                <label class="board-clock">@Clock REMAINING</label>
+            }
+
+            <div class="board-row board-heading"><label>NAME</label><label>TYPE</label><label>HIT</label><label>@(Session?.IsHeist==true ? "CARRY" : "TAKEN")</label><label>@(Session?.IsHeist==true ? "BANKED" : "PTS")</label></div>
+
+            @foreach(var row in Match.Standings)
+
+            {
+
+                <div class="board-row @(row.IsAi ? "ai" : "human") @(row.IsPlayer ? "you" : "")"><label>@(Match.RankOf(row)). @row.Name @(row.IsPlayer ? "(YOU)" : "")</label><label class="board-type">@(row.IsAi ? "AI" : "PLAYER")</label><label>@row.Landed</label><label>@(row.Heist ? row.Carried : row.Received)</label><label>@row.Points</label></div>
+
+            }
+
+        </div>
+
+    }
+
+    @if (Controls?.Open!=true && Match is not null && !Match.InRound && Match.Status == "TIME UP")
+
+    {
+
+        <div class="results-overlay"><div class="result">
+
+            <label class="result-title">ROUND COMPLETE</label>
+            <label class="result-reason">TIME LIMIT REACHED</label>
+            @if(Session?.IsHeist==true){<label class="result-reason">ONLY BANKED TOKENS COUNT · @(Match.PlayerState?.CarriedTokens ?? 0) LEFT UNBANKED</label>}
+
+            <label class="result-progress">@($"YOUR RANK: {PlayerRank} / 6   |   {Match.PlayerState?.Points ?? 0} PTS")</label>
+            <label class="personal-best @(Highlights.NewBest ? "new-best" : "")">@PersonalBestMessage</label>
+            <div class="round-awards">
+                @foreach(var award in RoundHighlights.Awards(Match.Standings))
+                {
+                    <div class="award-card"><label class="award-title">@award.Title</label><label class="award-winners">@award.Winners</label><label class="award-detail">@award.Detail</label></div>
+                }
+            </div>
+
+            <label class="result-reason">@(Session?.IsHeist==true ? "SCORE = BANKED TOKENS · CARRIED TOKENS DO NOT COUNT" : "POINTS = HITS LANDED - HITS RECEIVED / KNOCKDOWNS +2 / FALLS -2")</label>
+
+            <label class="result-reason">@(Session?.IsHeist==true ? "EQUAL BANKED TOTALS SHARE A RANK" : "FEWER HITS RECEIVED BREAKS TIES / EXACT TIES SHARE A RANK")</label>
+
+            <div class="result-stats"><label>@(Weapon?.Shots ?? 0) SHOTS</label><label>@(Match.PlayerState?.HitsLanded ?? 0) TAGS</label><label>@Accuracy ACCURACY</label></div>
+
+            <label class="retry">@RestartHint</label>
+            <button class="result-feedback" onclick=@OpenFeedback>FEEDBACK / REPORT A BUG</button>
+
+            <div class="result-actions">
+                @if (MultiplayerSession.Online && !Networking.IsHost)
+                {
+                    <div class="result-action primary unavailable"><label>WAITING FOR HOST</label></div>
+                }
+                else
+                {
+                    <button class="result-action primary" onclick=@(()=>Controls?.StartMatch())>START NEXT ROUND</button>
+                }
+                <button class="result-action" onclick=@OpenResultMenu>MATCH OPTIONS</button>
+                <button class="result-action" onclick=@(()=>Controls.QuitGame())>QUIT TO S&amp;BOX</button>
+            </div>
+
+        </div></div>
+
+    }
+
+    @if (Controls?.Open!=true && (Match is null || Match.InRound || (Match.Status == "TRAINING" || Match.Status == "LOBBY")))
+
+    {
+
+        <div class="crosshair @(Weapon?.HitFlash > 0 ? "hit" : "") @(MeleeHint ? "melee-ready" : "")"><div class="reticle-horizontal"></div><div class="reticle-vertical"></div>
+            @if(MeleeHint){<div class="melee-bracket left"></div><div class="melee-bracket right"></div>}
+        </div>
+
+    }
+
+    @if (ShowGameplayText)
+    {
+    <div class="roster"><label>@(Roster?.CharacterName ?? "Viper")</label>
+
+        @if (Match?.Status == "TRAINING")
+
+        {
+
+            <label class="hint">@string.Join(" / ",RosterSelection.Names.Select((name,i)=>$"{Key($"slot{i+1}")} {name.ToUpperInvariant()}"))</label>
+
+        }
+
+    </div>
+
+    <div class="stats"><label>@(Contact?.FeedbackRemaining>0 ? Contact.FeedbackText : Session?.IsHeist==true ? $"BANKED {Match?.PlayerState?.BankedTokens ?? 0}" : Match is not null && Match.Status != "TRAINING" ? $"POINTS {Match.PlayerState?.Points ?? 0}" : $"PRACTICE SCORE {Weapon?.Score ?? 0}")</label></div>
+
+    <div class="weapon"><label class="name">VX-9 HEARTLINE</label><div class="ammo"><label>@(Weapon?.UnlimitedAmmo == true ? "∞" : $"{Weapon?.Ammo ?? 40}")</label></div><label>@ShieldStatus@AmmoStatus</label></div>
+
+    @if (!string.IsNullOrEmpty(ContextHint))
+
+    {
+
+        <div class="context-prompt"><label>@ContextHint</label></div>
+
+    }
+
+    <div class="controls"><label>@MovementHint</label><label>@ActionHint</label></div>
+    }
+
+</root>
+
+
+
+@code {
+
+    PaintballControls Controls;
+
+    TextEntry NameEntry;
+
+    TextEntry JoinEntry;
+
+    bool ShowJoin,ShowFeedback;
+    string MenuPage="home";
+    string PlayLabel=>Session?.CanQuickPlay!=false ? "PLAY" : Session?.Status=="TIME UP" ? "VIEW RESULTS" : "RESUME";
+    void Play(){if(Session?.CanQuickPlay==true)Session.QuickPlay();else Controls?.ResumeGame();}
+    void BackHome(){if(Session?.Searching==true)Session.CancelPlaySearch();MenuPage="home";ShowJoin=false;}
+    public const string FeedbackUrl="https://sbox.game/solovolt/paintball-baddies/forum/3434/1/";
+    readonly RoundHighlights Highlights=new();
+    public Dictionary<string,int> PersonalRecords=>Highlights.Snapshot();
+    public void OpenFeedback(){if(Controls?.Open!=true)Controls?.Toggle();ShowFeedback=true;}
+    void BrowseGames(){ShowJoin=true;if(Session?.Searching!=true)Session?.RefreshLobbies();}
+    string RecordKey(int minutes,bool selected=false)=>RoundHighlights.RecordKey(ArenaMap.DisplayTitle(Scene),true,minutes)+((selected ? Session?.Mode==ArenaGameMode.PaintHeist : Session?.IsHeist==true) ? "|paint_heist" : "");
+    string MenuPersonalBest => Highlights.Read(RecordKey((int)(Match?.RoundDuration ?? 180)/60,true)) is int best
+        ? $"YOUR BEST: {best} PTS / {(int)(Match?.RoundDuration ?? 180)/60} MIN / MULTIPLAYER" : "YOUR BEST: FINISH A ROUND TO SET A SCORE";
+    string QuickControls=>$"{Key("forward")}/{Key("left")}/{Key("backward")}/{Key("right")} MOVE / HOLD FORWARD TO RUN / {Key("attack1")} FIRE / {Key("cover")} COVER / CROUCH / ESC or M MENU";
+    string PersonalBestMessage=>Highlights.Best is int best ? $"{(Highlights.NewBest ? "NEW PERSONAL BEST" : "PERSONAL BEST")}: {best} PTS / {Match?.PlayedMinutes} MIN / MULTIPLAYER" : "PERSONAL BEST: COMPLETE A ROUND TO SET YOUR SCORE";
+    bool ShowGameplayText => Controls?.ShowGameplayText != false;
+    PlayerVoiceChat LocalVoice => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<PlayerVoiceChat>();
+    string SpeakingNames => string.Join(", ",Scene.GetAllComponents<PlayerVoiceChat>()
+        .Where(x=>x.Talking).Select(x=>x.IsProxy ? x.Components.Get<PlayerProfile>()?.DisplayName ?? "Player" : "YOU").Take(6));
+
+    PaintballCombatant IncomingState=>MultiplayerSession.LocalPlayer(Scene)?.Components.Get<PaintballCombatant>();
+    bool ShowIncomingDirection=>Controls?.Open!=true && IncomingState is {} state && state.DirectionIndicatorRemaining>0
+        && state.LastHitDirection.Length>.01f && Match?.Status!="TIME UP";
+    string IncomingDirectionStyle=>!ShowIncomingDirection ? "" : System.FormattableString.Invariant(
+        $"transform: rotate({IncomingState.HitDirectionAngle(Scene.Camera?.WorldRotation ?? Rotation.Identity):0.0}deg); opacity: {System.Math.Clamp(IncomingState.DirectionIndicatorRemaining/.85f,0,1):0.00};");
+
+    string ConnectionHint=>$"{(Networking.IsHost ? "YOU ARE HOSTING" : "CONNECTED")} / {(Session?.PublicLobby==true ? "PUBLIC" : "FRIENDS ONLY")} / {Session?.Players.Count() ?? 0} HUMAN / {Session?.Bots.Count() ?? 0} AI / 6 TOTAL SEATS";
+
+    string AutoRunLabel=>$"AUTO-RUN: {(AutoRun?.Automatic==true ? "ON" : "OFF")} / HOLD FORWARD 1.25s";
+
+    MultiplayerSession Session=>MultiplayerSession.Find(Scene);
+
+    protected override void OnUpdate()
+    {
+        if(Controls.IsValid())Controls.EditingName=NameEntry?.HasFocus==true || (ShowJoin && JoinEntry?.HasFocus==true) || ShowFeedback;
+        if(Controls?.Open!=true){ShowFeedback=false;MenuPage="home";ShowJoin=false;}
+        var match=Match;
+        if(match?.InRound==true)Highlights.WatchActiveRound();
+        else if(match?.Status=="TIME UP" && match.Standings.FirstOrDefault(x=>x.IsPlayer) is {} row)
+            Highlights.Complete(RecordKey(match.PlayedMinutes),match.RoundSerial,row.Points);
+        else Highlights.ClearObservation();
+    }
+
+    protected override void OnStart(){Controls=Components.Get<PaintballControls>() ?? Components.Create<PaintballControls>();if(!Components.Get<HeistHud>().IsValid())Components.Create<HeistHud>();}
+
+    string Key(string name)=>Controls?.Label(name) ?? Input.GetButtonOrigin(name);
+
+    ForwardAutoRun AutoRun=>MultiplayerSession.LocalPlayer(Scene)?.Components.Get<ForwardAutoRun>();
+
+    string MovementHint=>$"{Key("forward")}/{Key("left")}/{Key("backward")}/{Key("right")} MOVE / {(AutoRun?.Automatic==true ? $"HOLD {Key("forward")} 1.25s TO RUN / " : "")}{Key("cover")} COVER / TOGGLE CROUCH / HOLD {Key("duck")} CROUCH";
+
+    string ActionHint=>$"{Key("attack1")} FIRE (COVER: PEEK & FIRE) / CLOSE CLICK: GUN BUTT / HOLD {Key("attack2")} FOCUS / {Key("shoulder")} SHOULDER / RUN+{Key("cover")} SLIDE / {Key("vault")} VAULT / {Key("togglehud")} TEXT / {Key("togglescoreboard")} SCOREBOARD / M MENU{(MultiplayerSession.Online ? $" / {(PlayerVoiceChat.HoldToTalk ? "HOLD " : "")}{Key("voice")} VOICE" : "")}";
+    bool MeleeHint => Cover?.Attached!=true && !Input.Down("attack2") && !Input.Down("attack1") && Contact?.MeleeAvailable==true;
+    PaintballMarker Weapon => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<PaintballMarker>();
+
+    RosterSelection Roster => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<RosterSelection>();
+
+    ArenaMatch Match => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<ArenaMatch>();
+
+    CoverController Cover => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<CoverController>();
+
+    VaultController Vault => MultiplayerSession.LocalPlayer(Scene)?.Components.Get<VaultController>();
+
+    string DamageHint {
+
+        get {
+
+            var player=MultiplayerSession.LocalPlayer(Scene);
+
+            var direction=player is null ? "" : Match?.PlayerState?.HitDirectionLabel(Rotation.FromYaw(player.EyeAngles.yaw));
+
+            return string.IsNullOrEmpty(direction) ? "TAGGED - KEEP MOVING" : $"TAGGED FROM {direction} - FIND COVER";
+
+        }
+
+    }
+
+    string ShieldStatus => Scene.GetAllComponents<ArenaShield>().FirstOrDefault(x=>x.Owner.IsValid() && x.Owner.GameObject==Weapon?.GameObject) is {} shield ? $"SHIELD {shield.Remaining}/{ArenaShield.Capacity} - " : "";
+
+    string AmmoStatus => Weapon?.UnlimitedAmmo == true ? "UNLIMITED PAINT / NO RELOAD" : Weapon?.ReloadRemaining > 0 ? "RELOADING" : "READY";
+
+    string RoundHint => MultiplayerSession.Online ? (Networking.IsHost ? "M - MULTIPLAYER MENU / B - START ROUND" : "WAITING FOR THE HOST TO START") : $"{Key("flashlight")} - START PAINT RUSH / {Key("roundlength")} - ROUND LENGTH: {(Match?.RoundDuration ?? 180)/60:0} MIN";
+
+    string Accuracy => Weapon?.Shots > 0 ? $"{System.Math.Clamp((int)System.Math.Round(100.0 * Weapon.Hits / Weapon.Shots),0,100)}%" : "-";
+
+    int ClockSeconds => (int)System.Math.Ceiling(Match?.Remaining ?? 0);
+
+    string Clock => $"{ClockSeconds / 60:00}:{ClockSeconds % 60:00}";
+
+    CloseCombat Contact => Weapon?.Components.Get<CloseCombat>();
+
+    bool ShowRecoveryPrompt => Controls?.Open!=true && Contact?.Incapacitated==true && Match?.Status!="TIME UP";
+    string RecoveryKey => (Input.UsingController ? Input.GetButtonOrigin("attack2") : Key("attack2")) switch
+    {
+        "MOUSE2" or "MOUSE 2" or "mouse2" => "RIGHT MOUSE",
+        var binding => binding
+    };
+    int RecoveryProgress => Contact?.Recovering==true ? CloseCombat.RequiredRecoveryPresses : Contact?.RecoveryPresses ?? 0;
+    string RecoveryMessage => Contact?.Recovering==true ? "BACK IN THE FIGHT" : Contact?.ReadyToRecover==true
+        ? $"QUICKLY TAP {RecoveryKey} TO GET UP" : $"GET READY TO TAP {RecoveryKey}";
+    string PlayerRank => Match is {} match && match.Standings.FirstOrDefault(x=>x.IsPlayer) is {} row ? match.RankOf(row).ToString() : "-";
+    string RestartHint => MultiplayerSession.Online && !Networking.IsHost ? "WAITING FOR HOST TO START THE NEXT ROUND / M MENU"
+        : $"{Key("flashlight")} - PLAY AGAIN / M MENU";
+    void OpenResultMenu()
+    {
+        if(Controls?.Open!=true)Controls?.Toggle();
+        MenuPage="matches";
+    }
+    string ContextHint => Vault?.IsVaulting == true ? "VAULTING" : string.Join(" / ",new[]{Vault?.Hint,Cover?.Hint}.Where(h=>!string.IsNullOrEmpty(h)));
+
+    protected override int BuildHash() => System.HashCode.Combine(
+
+        System.HashCode.Combine(Weapon?.Ammo,Weapon?.Shots,Weapon?.Hits,Weapon?.HitFlash>0,Weapon?.UnlimitedAmmo,Contact?.FeedbackRemaining>0,Contact?.FeedbackText,ShowGameplayText),
+
+        System.HashCode.Combine(Match?.Status,Highlights.Best,Highlights.NewBest,MenuPage,ShowJoin,Session?.QuickPlaying,ShowFeedback,Session?.Mode),Match?.StandingsHash,ClockSeconds,Match?.RoundDuration,Roster?.Selected,System.HashCode.Combine(ContextHint,IncomingDirectionStyle,ShowRecoveryPrompt,RecoveryMessage,RecoveryProgress,SpeakingNames,PlayerVoiceChat.ChatEnabled,System.HashCode.Combine(PlayerVoiceChat.HoldToTalk,MeleeHint)),System.HashCode.Combine(System.HashCode.Combine(Session?.Notice,Session?.Players.Count(),Session?.Bots.Count(),Session?.LobbyRevision,DamageHint,PlayLabel,Controls?.ShowScoreboard),Controls?.Open,Controls?.Capturing,Controls?.Notice,MovementHint,ActionHint,ShieldStatus));
+
+}
+

@@ -1,0 +1,51 @@
+@using Sandbox
+@using Sandbox.UI
+@using PaintballBaddies
+@inherits PanelComponent
+@namespace PaintballBaddies
+
+<root>
+@if(Visible)
+{
+    <div class="heist-wallet">
+        <div class="wallet-section carried"><div class="chip-icon"><div class="paint-drop"></div></div><div class="wallet-copy"><label class="amount">@Actor.CarriedTokens</label><label class="caption">CARRYING · AT RISK</label></div></div>
+        <div class="wallet-section banked"><div class="lock-icon"><div class="lock-loop"></div></div><div class="wallet-copy"><label class="amount">@Actor.BankedTokens</label><label class="caption">BANKED · SAFE</label></div></div>
+        <label class="wallet-rule">MOST BANKED WINS</label>
+    </div>
+    <div class="bank-guide">
+        <div class="bank-heading"><label class="bank-arrow" style="@ArrowStyle">↑</label><label>@(AtBank ? "BANK HERE" : $"BANK · {DistanceMetres}m")</label><label class="bank-relocation">MOVES IN @((int)System.MathF.Ceiling(Session.BankSeconds))s</label></div>
+        <label class="bank-instruction">@Prompt</label>
+        @if(AtBank && Actor.CarriedTokens>0)
+        { <div class="deposit-track"><div class="deposit-fill" style="@ProgressStyle"></div></div> }
+    </div>
+    @if(Actor.TokenNoticeRemaining>0)
+    { <div class="token-feedback @(Actor.TokenEvent=="spill" ? "spill" : Actor.TokenEvent=="bank" ? "secured" : "")"><label>@Actor.TokenNotice</label></div> }
+    @if(!AtBank && !string.IsNullOrEmpty(Session.BankNotice))
+    { <div class="bank-notice"><label>@Session.BankNotice</label></div> }
+}
+</root>
+
+@code {
+    MultiplayerSession Session=>MultiplayerSession.Find(Scene);
+    PaintballCombatant Actor=>MultiplayerSession.LocalPlayer(Scene)?.Components.Get<PaintballCombatant>();
+    PaintballControls Controls=>Scene.GetAllComponents<PaintballControls>().FirstOrDefault();
+    bool Visible=>Session.IsValid() && Session.IsHeist && Session.InRound && Actor.IsValid() && Controls?.Open!=true;
+    bool AtBank=>Session?.InBank(Actor)==true;
+    int DistanceMetres=>Actor.IsValid() && Session.IsValid() ? (int)System.MathF.Ceiling((Session.BankPosition-Actor.WorldPosition).WithZ(0).Length*.0254f) : 0;
+    bool NearbyChip=>Actor.IsValid() && Scene.GetAllComponents<HeistChip>().Any(c=>!c.Collected && (c.WorldPosition-Actor.WorldPosition).Length<120);
+    string Prompt=>!Session.IsValid() || !Actor.IsValid() ? "" : Session.BankIndex<0 ? "PREPARING BANK..." : Actor.Components.Get<CloseCombat>()?.Incapacitated==true ? "GET UP TO COLLECT OR BANK" :
+        AtBank && Actor.CarriedTokens>0 ? Actor.HitFeedbackRemaining>0 ? "HIT! DEPOSIT INTERRUPTED — FIND COVER" : "STAY IN THE RING TO BANK — NO BUTTON NEEDED" :
+        NearbyChip ? "WALK OVER GOLD CHIPS TO COLLECT" : Actor.CarriedTokens>0 ? "FOLLOW THE ARROW TO SECURE YOUR TOKENS" : "HIT OPPONENTS TO EARN TOKENS";
+    string ArrowStyle {
+        get {
+            if(!Actor.IsValid() || !Session.IsValid())return "";
+            var view=Scene.Camera?.WorldRotation ?? Rotation.Identity;var direction=(Session.BankPosition-Actor.WorldPosition).WithZ(0).Normal;
+            float angle=System.MathF.Atan2(Vector3.Dot(direction,view.Right.WithZ(0).Normal),Vector3.Dot(direction,view.Forward.WithZ(0).Normal))*180/System.MathF.PI;
+            return System.FormattableString.Invariant($"transform: rotate({angle:0}deg);");
+        }
+    }
+    string ProgressStyle=>System.FormattableString.Invariant($"width: {(Actor?.BankProgress ?? 0)*100:0}%;");
+    // Panels also hash while the session/player is being created or destroyed.
+    protected override int BuildHash()=>!Visible ? 0 : System.HashCode.Combine(Visible,Actor?.CarriedTokens,Actor?.BankedTokens,Prompt,ArrowStyle,ProgressStyle,
+        System.HashCode.Combine(Actor?.TokenNotice,Actor?.TokenNoticeRemaining>0,Actor?.TokenEvent,Session?.BankNotice,DistanceMetres,(int)(Session?.BankSeconds ?? 0)));
+}

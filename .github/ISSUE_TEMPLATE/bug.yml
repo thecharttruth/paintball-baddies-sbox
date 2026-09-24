@@ -1,0 +1,31 @@
+name: Bug report
+description: Report a reproducible problem in Paintball Baddies.
+title: "[Bug] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Game build and s&box version
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Where did it happen?
+      options:
+        - Single player
+        - Multiplayer host
+        - Multiplayer joining player
+        - Editor or custom map
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected result, and actual result
+      description: Include the map and controls used. A short capture helps. Remove personal data from logs.
+    validations:
+      required: true
+  - type: textarea
+    id: system
+    attributes:
+      label: Hardware and connection, if relevant
+      description: CPU, GPU, RAM, resolution, graphics settings; Wi-Fi or wired for connection issues.

@@ -1,0 +1,41 @@
+name: Community map or improvement
+description: Propose work for playtesting and possible official inclusion.
+title: "[Community] "
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Contribution type
+      options:
+        - New arena
+        - Gameplay or bug fix
+        - Animation or presentation
+        - Sound or art
+        - Performance or accessibility
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What does it add or improve?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Editable source, package link, author credits and licenses
+      description: Include the exact source revision and disclose any generative AI use.
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: Tests, captures and known issues
+      description: Distinguish automated/client testing from feedback by real people.
+    validations:
+      required: true
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Contribution permission
+      options:
+        - label: I have the rights to share this work under the stated licenses and request consideration for official inclusion.
+          required: true
